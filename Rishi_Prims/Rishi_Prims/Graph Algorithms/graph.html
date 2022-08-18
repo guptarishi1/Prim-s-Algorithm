@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prims Algo</title>
+    <link rel="stylesheet" href="./Style.css">
+
+    <!-- here external libraries -->
+    <script type="text/javascript" src="../lib/p5/p5.min.js"></script>
+
+    <!-- here internal source files -->
+    <script type="text/javascript" src="../src/graphics.js"></script>
+    <script type="text/javascript" src="../src/globals.js"></script>
+    <script type="text/javascript" src="../src/text.js"></script>
+    <script type="text/javascript" src="../src/timer.js"></script>
+    <script type="text/javascript" src="../src/utils.js"></script>
+    <script type="text/javascript" src="../src/brain.js"></script>
+
+    <!-- Below are the visulisation of Prims -->
+    <script type="text/javascript" src= "graph.js"></script>
+    <script type="text/javascript" src= "prim.js"></script>
+</head>
+<body>
+    <h1 style="text-align:center">
+        Topic - Prim's Algorithm
+    </h1>
+    <div class="details">
+       <ul>
+        <li class="list-items">
+            Name - Rishi Gupta 
+        </li>
+        <li class="list-items">
+            NUID - 002921999
+        </li>
+        <h3>
+            What is Prim's Algorithm
+        </h3>
+        <p> It falls under a class of algorithms called greedy algorithms that find the local optimum in the hopes of finding a global optimum.
+
+            We start from one vertex and keep adding edges with the lowest weight until we reach our goal.
+            
+            The steps for implementing Prim's algorithm are as follows:
+            
+            Initialize the minimum spanning tree with a vertex chosen at random.
+            Find all the edges that connect the tree to new vertices, find the minimum and add it to the tree
+            Keep repeating step 2 until we get a minimum spanning tree</p>
+        
+        <h3>
+         Time and Space complexity of the Algorithm: 
+        </h3>
+        <p> Prim’s algorithm has a time complexity of O(V2), V being the number of vertices and can be improved up to O(E log V) using Fibonacci heaps
+            Total space complexity is of order O(V+E).
+
+        </p>
+        <h3>
+            Prim's Algorithm psuedo code :-
+        </h3>
+        <p>
+            
+            prims(Graph g) { <br/>
+                &emsp;foreach vertex v in g: <br/>
+                &emsp;&emsp;v.distance = INF<br/>
+                &emsp;start = g.getSomeArbitraryVertex()<br/>
+                &emsp;start.distance = 0<br/>
+                
+            &emsp;    mst = {}<br/>
+            &emsp;    heap = buildHeap(g.vertices – {start})<br/>
+            &emsp;    foreach vertex v in start.neighbors():<br/>
+            &emsp;     &emsp;   v.distance = g.weight(start, v)<br/>
+            &emsp;     &emsp;   v.previous = start<br/>
+            &emsp;     &emsp;   heap.decreaseKey(v, v.distance)<br/>
+            &emsp;    while (! heap.empty()):<br/>
+            &emsp;     &emsp;   v = heap.deleteMin()<br/>
+            &emsp;     &emsp;   mst.addEdge(v, v.previous)<br/>
+            &emsp;     &emsp;   foreach edge (v, u) in g:<br/>
+            &emsp;     &emsp;     &emsp;  d1 = v.distance<br/>
+            &emsp;     &emsp;     &emsp;  d2 = u.distance<br/>
+            &emsp;     &emsp;     &emsp;  if (d1 < d2):<br/>
+            &emsp;     &emsp;     &emsp;    &emsp;  u.previous = v <br/>
+        </p>
+        <h3>
+            Pros and Cons of Prim's Algorithm
+        </h3>
+        <h4>
+            Pros:
+        </h4>
+
+        <p>
+            
+            1) Easy to understand.<br/>
+            2) Root node is selected so clear about the 
+            starting node.<br/>
+        </p>
+        
+        <h4>
+            Cons:
+        </h4>
+        <p>
+            1) Time taken to check for smallest weight arc
+            makes it slow for large numbers of nodes.<br/>
+            2) Difficult to program, though it can be
+            programmed in matrix form<br/>
+            3) Same weight may increase the complexity
+            when one of the weights is eliminated in a cycle<br/>
+        
+        
+       
+            4)Prim’s algorithm fails for Directed Graph :<br/>
+       
+        
+            Prim’s algorithm assumes that all vertices are connected. But in a directed graph, every node is not reachable from every other node. So, Prim’s algorithm fails due to this reason <br/>
+        </p>
+        
+        <img src="../src/Screenshot 2022-08-17 181542.png " alt="SS" >
+
+        <h3>
+            Applications of Prim’s Algorithm:
+         
+
+        </h3>
+        <p>
+            1. Distance in the middle of the cities for the minimum route calculation for transportation.<br/>
+            
+            2. For Establishing the network cables play a crucial role in discovering the minimum cables needed to cover the whole region.<br/>
+            
+            3. Cluster Analysis: k clustering problem can be considered as obtaining an MST and deleting the k-1 most pricey edges.<br/>
+            
+            4. Path-finding algorithms used in AI (Artificial Intelligence).<br/>
+            
+            5. Game Development.<br/>
+            
+            6. Especially maze games.<br/>
+            
+            7. To make protocols in network cycles.<br/>
+            
+            8. Cognitive Science<br/>
+
+        </p>
+
+
+        <h3>
+            Conclusion 
+        </h3>
+        <p>
+
+            we checked how prims algorithm uses the GReddy approach to create the minimum spanning tree. 
+            The use of greedy’s algorithm makes it easier for choosing the edge with minimum weight. 
+            Also, we analyzed how the min-heap is chosen, and the tree is formed.
+             The time complexity for this algorithm has also been discussed, and how this algorithm is achieved we saw that too. 
+             by this, we can say that the prims algorithm is a good greedy approach to find the minimum spanning tree.  
+        </p>
+       </ul> 
+       
+    </div>
+
+</body>
+</html>
