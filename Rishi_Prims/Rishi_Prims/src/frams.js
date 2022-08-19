@@ -1,4 +1,4 @@
-let fr = 30;  // frame rate
+let fr = 90;  // frame rate
 
 
 let cvw = 1300;

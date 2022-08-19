@@ -8,9 +8,9 @@ class Line {
         this.x2 = args.x2 || 0;
         this.y2 = args.y2 || 0;
         this.duration = args.duration || 1;
-        //this.mode = args.mode || 2;
+       
 
-        // starting frame for initialization animation
+        //the startup animation's beginning frame
         this.start = args.start || 1;
         this.strokeweight = args.strokeweight || 3;
         this.st = new StrokeChanger(this.s, args.color);
@@ -93,11 +93,9 @@ class Arrow extends Line {
         } else {
             this.timer = new Timer2(frames(this.duration));
         }
-        //this.fadeOut = args.fadeOut || false;
-
-        // define tip length/angle for all vectors on this canvas
+        
         this.tipLen = args.tipLen || 1;
-        this.tipAngle = args.tipAngle || 0.4;  // this is in radians
+        this.tipAngle = args.tipAngle || 0.4;  
 
         let t = Arrow.setArrow(this.x1, this.y1, this.x2, this.y2, this.tipLen, this.tipAngle);
         this.x3 = t[0];
@@ -106,7 +104,7 @@ class Arrow extends Line {
         this.y4 = t[3];
     }
 
-    // reset the start and end points of the arrow
+  
     reset(args) {
         super.reset(args);
         let t = Arrow.setArrow(this.x1, this.y1, this.x2, this.y2, this.tipLen, this.tipAngle);
@@ -117,26 +115,21 @@ class Arrow extends Line {
     }
 
 
-    // I could have used arctan() to first obtain the angle of the arrow, then calculate the
-    // angle of the two line segments, and finally get their coordinates.
-    // However, arctan() will discard information about how the arrow is oriented (domain -90 ~ 90)
-    // so I use another strategy: first scale the original line, then apply the rotation matrix.
+
     static setArrow(x1, y1, x2, y2, tipLen, tipAngle) {
-        let dx = x1 - x2;    // note it's x1 - x2
+        let dx = x1 - x2;  
         let dy = y1 - y2;
 
         let len = Math.sqrt(dx * dx + dy * dy);
 
-        // calculate the position
+        
         let x = dx / len * tipLen;
         let y = dy / len * tipLen;
 
         let sin_theta = Math.sin(tipAngle);
         let cos_theta = Math.cos(tipAngle);
 
-        // x1, x2 are the coordinates of start point and end point; arrow points from x1 to x2.
-        // x3, x4 are the endpoints of the two lines originating from x2 that draw the arrow.
-        // Ditto for y3 and y4.
+      
         let x3 = x2 + cos_theta * x - sin_theta * y;
         let y3 = y2 + sin_theta * x + cos_theta * y;
         let x4 = x2 + cos_theta * x + sin_theta * y;
@@ -154,7 +147,7 @@ class Arrow extends Line {
         this.s.line(this.x2, this.y2, this.x4, this.y4);
     }
 
-    static showArrow(obj, t) {  // // show the two line segments at the tip; also used by ArcArrow
+    static showArrow(obj, t) {  
         let dx3 = obj.x3 - obj.x2;
         let dy3 = obj.y3 - obj.y2;
         obj.s.line(obj.x2, obj.y2, obj.x2 + t * dx3, obj.y2 + t * dy3);
@@ -165,12 +158,12 @@ class Arrow extends Line {
     }
     
     showGrow() {
-        // show the main line
+        
         let dx2 = this.x2 - this.x1;
         let dy2 = this.y2 - this.y1;
         this.showSetup();
 
-        // 2019-01-26 BUG FIX: no wonder why the display of arrows appears 6 times slower...
+        
         let t = this.timer.advance();
 
         this.s.line(this.x1, this.y1, this.x1 + t * dx2, this.y1 + t * dy2);
@@ -236,10 +229,10 @@ class Pie extends PointBase {
 class Arc extends Pie {
     constructor(ctx, args) {
         super(ctx, args);
-        this.n = args.detail || 27;  // number of segments - 1
+        this.n = args.detail || 27;  
         this.p = [];
         let a = this.a1;
-        let da = (this.a2 - this.a1) / (this.n - 1);  // number of anchor points = # segment + 1
+        let da = (this.a2 - this.a1) / (this.n - 1);  
         for (let i = 0; i < this.n; i++) {
             let x = this.x + this.r * Math.cos(a), y = this.y + this.r * Math.sin(a);
             a += da;
@@ -271,7 +264,7 @@ class ArcArrow extends Arc {
         this.tipAngle = args.tipAngle || 0.3;
         
         this.x2 = this.p[this.n - 1][0];
-        this.y2 = this.p[this.n - 1][1] - 1;  // fixme
+        this.y2 = this.p[this.n - 1][1] - 1;  
         let dx = this.x2 - this.x, dy = this.y2 - this.y;
         let t = Arrow.setArrow(this.x2 - dy, this.y2 + dx - this.strokeweight,
             this.x2, this.y2, this.tipLen, this.tipAngle);

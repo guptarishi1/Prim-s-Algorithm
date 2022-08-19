@@ -98,19 +98,18 @@ class Graph_Prim extends Graph_U {
             if (this.state === 0) {
                 this.nodes[this.added].reColor(this.VColor);
 
-                this.state = 1;  // never returns to 0
-            } else if (this.state === 1) {  // search for smallest edge
+                this.state = 1;  
+            } else if (this.state === 1) {  // finds the smallest edge
                 let weight = 1000000;
                 this.curEdge = [-1, -1];
                 this.arr.reset({
                     x1: 637, y1: 240, x2: 677, y2: 240
                 });
                 for (let i = 0; i < this.n; i++) {
-                    for (let j = i + 1; j < this.n; j++) {  // graph is undirected, start at i + 1
-                        // there is an edge from i to j, exactly one of i and j is in T,
-                        // and the edge is not already added (note: undefined > -1 is false)
+                    for (let j = i + 1; j < this.n; j++) {  // The graph is undirected and begins at I + 1.
+
                         if (this.A[i][j] > -1 && this.T[i] + this.T[j] === 1) {
-                            if (this.T[i])  // highlight goes from vertex in T to vertex not in T
+                            if (this.T[i])  //The spotlight moves from a vertex in T to a vertex that is not in T.
                                 this.edges[i][j].highlight();
                             else
                                 this.edges[j][i].highlight();
@@ -122,12 +121,12 @@ class Graph_Prim extends Graph_U {
                         }
                     }
                 }
-                // mark edge and vertex in the set
+               
                 this.A[this.curEdge[0]][this.curEdge[1]] = -1;
                 this.T[this.added] = 1;
 
                 this.state = 2;
-            } else if (this.state === 2) {  // pick the smallest edge
+            } else if (this.state === 2) {  // this help to picks the smallest edge
                 this.edges[this.curEdge[0]][this.curEdge[1]].shake(12);
                 this.arr.reset({
                     x1: 637, y1: 330, x2: 677, y2: 330
@@ -135,7 +134,7 @@ class Graph_Prim extends Graph_U {
 
                 this.state = 3;
             } 
-            else {  // add vertex and edge
+            else {  // this adds edge and nodes
                 this.edges[this.curEdge[0]][this.curEdge[1]].addEdge(Green);
 
                 this.nodes[this.added].reColor(this.VColor);
