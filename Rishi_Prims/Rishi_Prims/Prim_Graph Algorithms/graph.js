@@ -394,8 +394,8 @@ class Graph_U extends Graph {
     constructor(ctx, args) {
         super(ctx, args);
         for (let i = 0; i < this.m; i++) {
-            let a = this.E[i][0], b = this.E[i][1];  // two connecting nodes
-            let d = this.E[i][2], c = this.E[i][3];  // radius and label
+            let a = this.E[i][0], b = this.E[i][1];  // this connects two nodes
+            let d = this.E[i][2], c = this.E[i][3]; 
             if (c !== undefined)
                 this.A[a][b] = this.A[b][a] = c;
             else
@@ -412,7 +412,7 @@ class Graph_U extends Graph {
             this.edges[b][a] = new Edge(this.s, {
                 x1: this.V[b][0], y1: this.V[b][1],
                 x2: this.V[a][0], y2: this.V[a][1], color: args.color_e,
-                start: this.start + frames(this.dur) + 1, d: -d,  // notice d is inverted
+                start: this.start + frames(this.dur) + 1, d: -d, 
                 duration: 0.8, node_r: this.radius, directed: false, label: false
             });
         }
@@ -424,8 +424,8 @@ class Graph_D extends Graph {
     constructor(ctx, args) {
         super(ctx, args);
         for (let i = 0; i < this.m; i++) {
-            let a = this.E[i][0], b = this.E[i][1];  // two connecting nodes
-            let d = this.E[i][2], c = this.E[i][3];  // radius and label
+            let a = this.E[i][0], b = this.E[i][1];  //  this connect two nodes 
+            let d = this.E[i][2], c = this.E[i][3];  
             if (c !== undefined)
                 this.A[a][b] = c;
             else
@@ -449,7 +449,7 @@ class Tracer extends PointBase {
         this.n = 1;
         this.xs = [];
         this.ys = [];
-        this.to = 17;  // time offset
+        this.to = 17;  
 
         this.t[0] = new TextWriteIn(this.s, {
             str: args.str, color: Yellow,
@@ -467,7 +467,7 @@ class Tracer extends PointBase {
             str: str, x: this.x + x, y: this.y + y, size: size || 29, start: this.start,
             color: color || White
         });
-        this.start += str.length + (frameOff ? frameOff : this.to);  // disabled for github pages
+        this.start += str.length + (frameOff ? frameOff : this.to);  
         this.n++;
         if (index >= 0) {
             this.xs[index] = this.x + x;
@@ -488,9 +488,9 @@ class Tracer extends PointBase {
 }
 
 
-function randomizeWeights(arr, max) {  // this will change the array
+function randomizeWeights(arr, max) {  
     for (let i = 0; i < arr.length; i++) {
-        arr[i][3] = Math.floor(Math.random() * max);  // fixme: random often gives duplicate nums
+        arr[i][3] = Math.floor(Math.random() * max);  
     }
 }
 
