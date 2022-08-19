@@ -91,7 +91,7 @@ class Node extends PointBase {
         this.thickness = thickness || 17;
         this.f = 0;
         this.h_timer = new tmr1(frames(0.67));
-        this.s_timer = new FillChanger(this.s, this.h_color);
+        this.s_timer = new filler(this.s, this.h_color);
     }
 
     dehighlight() {
@@ -346,7 +346,7 @@ class Edge extends Line {
         this.thickness = thickness || 14;
         this.f = 0;
         this.h_timer = new tmr2(frames(0.67));
-        this.s_timer = new StrokeChanger(this.s, this.h_color);
+        this.s_timer = new changestk(this.s, this.h_color);
     }
 
     

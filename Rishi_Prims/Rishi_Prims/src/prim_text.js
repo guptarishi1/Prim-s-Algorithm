@@ -23,7 +23,7 @@ class Text extends TextBase {
         this.str = args.str;
         this.mode = args.mode || 0;
         this.color = args.color || [122, 0, 255];
-        this.ft = new FillChanger(ctx, this.color);
+        this.ft = new filler(ctx, this.color);
         this.stroke = args.stroke || undefined;
         this.sw = args.strokeweight || 1.7;
 
@@ -116,7 +116,7 @@ class TextFade extends Text {
         this.initC[3] = 0;
         if (this.color[3] === undefined)
             this.color[3] = 255;
-        this.ft = new FillChanger(ctx, this.initC);
+        this.ft = new filler(ctx, this.initC);
 
         this.duration = args.duration || 0.7;
         this.timer = new tmr0(frames(this.duration));

@@ -13,7 +13,7 @@ class Line {
         //the startup animation's beginning frame
         this.start = args.start || 1;
         this.strokeweight = args.strokeweight || 3;
-        this.st = new StrokeChanger(this.s, args.color);
+        this.st = new changestk(this.s, args.color);
 
         this.timer = new TimerFactory(frames(this.duration), args.mode);
 
@@ -195,10 +195,10 @@ class Pie extends PointBase {
 
         this.r = args.r || 100;
         this.timer = new tmr1(frames(this.duration));
-        this.st = new StrokeChanger(this.s, args.color);
+        this.st = new changestk(this.s, args.color);
         this.fill = args.fill || undefined;
         if (this.fill)
-            this.ft = new FillChanger(this.s, args.fill);
+            this.ft = new filler(this.s, args.fill);
 
         this.strokeweight = args.strokeweight || 3;
         this.timer_sw = new weighttime(this.s, this.end, this.strokeweight, 0.7);

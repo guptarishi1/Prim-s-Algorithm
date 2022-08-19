@@ -156,7 +156,7 @@ class ColorChanger {
 }
 
 
-class StrokeChanger extends ColorChanger {
+class changestk extends ColorChanger {
     constructor(ctx, initColor) {
         super(ctx, initColor);
     }
@@ -168,7 +168,7 @@ class StrokeChanger extends ColorChanger {
     }
 }
 
-class FillChanger extends ColorChanger {
+class filler extends ColorChanger {
     constructor(ctx, initColor) {
         super(ctx, initColor);
     }
