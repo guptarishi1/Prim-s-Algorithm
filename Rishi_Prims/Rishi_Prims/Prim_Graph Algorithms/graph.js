@@ -390,7 +390,7 @@ class Edge extends Line {
 }
 
 
-class Graph_U extends grph {
+class Graph_effect extends grph {
     constructor(ctx, args) {
         super(ctx, args);
         for (let i = 0; i < this.m; i++) {

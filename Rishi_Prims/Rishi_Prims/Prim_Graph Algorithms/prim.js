@@ -40,7 +40,7 @@ let G = {
 };
 
 
-class Graph_Prim extends Graph_U {
+class Graph_Prim extends Graph_effect {
     constructor(ctx, args) {
         super(ctx, args);
         this.state = 0;  // 0 for searching edges, 1 for adding vertex/edge
