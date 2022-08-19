@@ -119,7 +119,7 @@ class TextFade extends Text {
         this.ft = new FillChanger(ctx, this.initC);
 
         this.duration = args.duration || 0.7;
-        this.timer = new Timer0(frames(this.duration));
+        this.timer = new tmr0(frames(this.duration));
     }
 
     show() {

@@ -1,5 +1,5 @@
 
-class Timer {
+class tmr {
     constructor(frames) {
         this.frames = frames;
         this.f = 1;
@@ -11,7 +11,7 @@ class Timer {
 }
 
 
-class Timer0 extends Timer {
+class tmr0 extends tmr {
     constructor(frames) {
         super(frames);
         this.v = 1 / frames;
@@ -27,7 +27,7 @@ class Timer0 extends Timer {
 }
 
 
-class Timer1 extends Timer {
+class tmr1 extends tmr {
     constructor(frames) {
         super(frames);
         this.a = -2 / (frames * frames);
@@ -52,7 +52,7 @@ class Timer1 extends Timer {
 }
 
 
-class Timer2 extends Timer {
+class tmr2 extends tmr {
     constructor(frames) {
         super(frames);
         this.v = 0;
@@ -82,24 +82,24 @@ class Timer2 extends Timer {
 
 function TimerFactory(frames, mode) {
     if (mode === 0) {
-        return new Timer0(frames);
+        return new tmr0(frames);
     } else if (mode === 1) {
-        return new Timer1(frames);
+        return new tmr1(frames);
     } else if (mode === 2) {
-        return new Timer2(frames);
+        return new tmr2(frames);
     } else {
-        return new Timer2(frames);
+        return new tmr2(frames);
     }
 }
 
 
-class StrokeWeightTimer {
+class weighttime {
     constructor(ctx, end, strokeWeight, duration) {
         this.s = ctx;
         this.end = end;
         this.sw = strokeWeight || 4;
         this.duration = duration || 1;
-        this.timer = new Timer0(frames(this.duration));
+        this.timer = new tmr0(frames(this.duration));
     }
 
     advance() {
@@ -134,7 +134,7 @@ class ColorChanger {
         this.duartion = frames(1);
         if (duration)
             this.duartion = frames(duration);
-        this.timer = new Timer0(this.duartion);
+        this.timer = new tmr0(this.duartion);
     }
 
     changing() {

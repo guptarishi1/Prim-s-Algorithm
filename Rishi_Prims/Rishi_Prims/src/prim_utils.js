@@ -18,7 +18,7 @@ class Line {
         this.timer = new TimerFactory(frames(this.duration), args.mode);
 
         this.end = args.end || 100000;
-        this.timer_sw = new StrokeWeightTimer(this.s, this.end, this.strokeweight, 0.7);
+        this.timer_sw = new weighttime(this.s, this.end, this.strokeweight, 0.7);
     }
 
     
@@ -89,9 +89,9 @@ class Arrow extends Line {
         this.fadeIn = args.fadeIn || false;
         if (this.fadeIn) {
             this.colorArr = args.colorArr || [255, 255, 255];
-            this.timer = new Timer0(frames(this.duration));
+            this.timer = new tmr0(frames(this.duration));
         } else {
-            this.timer = new Timer2(frames(this.duration));
+            this.timer = new tmr2(frames(this.duration));
         }
         
         this.tipLen = args.tipLen || 1;
@@ -194,14 +194,14 @@ class Pie extends PointBase {
         this.a2 = args.a2 || 6.283;
 
         this.r = args.r || 100;
-        this.timer = new Timer1(frames(this.duration));
+        this.timer = new tmr1(frames(this.duration));
         this.st = new StrokeChanger(this.s, args.color);
         this.fill = args.fill || undefined;
         if (this.fill)
             this.ft = new FillChanger(this.s, args.fill);
 
         this.strokeweight = args.strokeweight || 3;
-        this.timer_sw = new StrokeWeightTimer(this.s, this.end, this.strokeweight, 0.7);
+        this.timer_sw = new weighttime(this.s, this.end, this.strokeweight, 0.7);
     }
 
     showSetup() {

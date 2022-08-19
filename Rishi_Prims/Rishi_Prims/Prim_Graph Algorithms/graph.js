@@ -90,7 +90,7 @@ class Node extends PointBase {
         this.h_fr = frames(this.h_dur);
         this.thickness = thickness || 17;
         this.f = 0;
-        this.h_timer = new Timer1(frames(0.67));
+        this.h_timer = new tmr1(frames(0.67));
         this.s_timer = new FillChanger(this.s, this.h_color);
     }
 
@@ -345,7 +345,7 @@ class Edge extends Line {
         this.h_fr = frames(this.h_dur);
         this.thickness = thickness || 14;
         this.f = 0;
-        this.h_timer = new Timer2(frames(0.67));
+        this.h_timer = new tmr2(frames(0.67));
         this.s_timer = new StrokeChanger(this.s, this.h_color);
     }
 
@@ -419,89 +419,3 @@ class Graph_effect extends grph {
     }
 }
 
-
-class Graph_D extends grph {
-    constructor(ctx, args) {
-        super(ctx, args);
-        for (let i = 0; i < this.m; i++) {
-            let a = this.E[i][0], b = this.E[i][1];  //  this connect two nodes 
-            let d = this.E[i][2], c = this.E[i][3];  
-            if (c !== undefined)
-                this.A[a][b] = c;
-            else
-                this.A[a][b] = true;
-
-            this.edges[a][b] = new Edge(this.s, {
-                x1: this.V[a][0], y1: this.V[a][1],
-                x2: this.V[b][0], y2: this.V[b][1],
-                start: this.start + frames(this.dur) * i / this.m, d: d, color: args.color_e,
-                duration: 0.8, node_r: this.radius, directed: true, weight: c,
-            });
-        }
-    }
-}
-
-
-class Tracer extends PointBase {
-    constructor(ctx, args) {
-        super(ctx, args);
-        this.t = [];
-        this.n = 1;
-        this.xs = [];
-        this.ys = [];
-        this.to = 17;  
-
-        this.t[0] = new TextWriteIn(this.s, {
-            str: args.str, color: Yellow,
-            x: args.x, y: args.y, size: args.size || 29, start: this.start,
-        });
-        this.start += args.str.length + this.to * 2;
-
-        this.arr = new Arrow(this.s, {
-            x1: 0, x2: 0, y1: 1, y2: 1, start: args.begin, color: args.arrColor || Orange,
-        });
-    }
-
-    add(str, index, x, y, size, color, frameOff) {
-        this.t[this.n] = new TextWriteIn(this.s, {
-            str: str, x: this.x + x, y: this.y + y, size: size || 29, start: this.start,
-            color: color || White
-        });
-        this.start += str.length + (frameOff ? frameOff : this.to);  
-        this.n++;
-        if (index >= 0) {
-            this.xs[index] = this.x + x;
-            this.ys[index] = this.y + y;
-        }
-    }
-
-    reset(index) {
-        this.arr.reset({
-            x1: this.xs[index] - 50, x2: this.xs[index] - 10,
-            y1: this.ys[index] + 17, y2: this.ys[index] + 17,
-        });
-    }
-    show() {
-        for (let t of this.t) t.show();
-        this.arr.show();
-    }
-}
-
-
-function randomizeWeights(arr, max) {  
-    for (let i = 0; i < arr.length; i++) {
-        arr[i][3] = Math.floor(Math.random() * max);  
-    }
-}
-
-
-function randomizeEdges(arr, prob) {
-    let r = [];
-    let l = 0;
-    for (let i = 0; i < arr.length; i++)
-        if (Math.random() < prob) {
-            r[l] = arr[i];
-            l++;
-        }
-    return r;
-}

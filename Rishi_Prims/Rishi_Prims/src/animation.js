@@ -52,7 +52,7 @@ class PointBase {
         if (duration)
             this.move_duartion = frames(duration);
         this.f = 0;
-        this.move_timer = new Timer2(this.move_duartion);
+        this.move_timer = new tmr2(this.move_duartion);
     }
 
     jump(amp, duration) {
@@ -63,7 +63,7 @@ class PointBase {
         if (duration)
             this.move_duartion = frames(duration);
         this.f = 0;
-        this.move_timer = new Timer2(this.move_duartion);
+        this.move_timer = new tmr2(this.move_duartion);
     }
 
     shaking() {
