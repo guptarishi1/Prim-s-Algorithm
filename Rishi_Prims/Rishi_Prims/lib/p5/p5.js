@@ -52180,11 +52180,17 @@ p5.prototype.createCanvas = function(w, h, renderer) {
     c.style.visibility = 'hidden';
   }
 
+  console.log("Hi");
   if (this._userNode) {
     // user input node case
+    console.log("cool");
     this._userNode.appendChild(c);
   } else {
-    document.body.appendChild(c);
+    console.log("hi");
+    var main_div = document.getElementById("canvas-result");
+    main_div.appendChild(c);
+    // document.body.appendChild(c);
+
   }
 
   // Init our graphics renderer
