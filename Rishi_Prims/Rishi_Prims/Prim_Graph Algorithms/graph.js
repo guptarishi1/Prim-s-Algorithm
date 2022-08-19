@@ -1,5 +1,5 @@
 
-class Graph extends PointBase {
+class grph extends PointBase {
     constructor(ctx, args) {
         super(ctx, args);
         this.f = 82;   // how many frames are needed to advance one stage of the algorithm
@@ -390,7 +390,7 @@ class Edge extends Line {
 }
 
 
-class Graph_U extends Graph {
+class Graph_U extends grph {
     constructor(ctx, args) {
         super(ctx, args);
         for (let i = 0; i < this.m; i++) {
@@ -420,7 +420,7 @@ class Graph_U extends Graph {
 }
 
 
-class Graph_D extends Graph {
+class Graph_D extends grph {
     constructor(ctx, args) {
         super(ctx, args);
         for (let i = 0; i < this.m; i++) {
