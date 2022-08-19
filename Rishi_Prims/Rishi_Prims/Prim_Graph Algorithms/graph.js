@@ -60,7 +60,7 @@ class Node extends PointBase {
         this.sw = args.strokeweight || 2;
         this.color = args.color || Blue;
         this.yOffset = args.yOffset || -4;
-        this.fill = args.fill || vector_multiply(this.color, 0.14);
+        this.fill = args.fill || multiple_vect(this.color, 0.14);
 
         this.c = new Circle(this.s, {
             x: this.x, y: this.y, r: this.r, start: this.start, end: this.end,
@@ -122,7 +122,7 @@ class Node extends PointBase {
     reColor(ringColor, fillColor, txtColor, duration) {
        
         this.c.st.reColor(ringColor, duration);
-        this.c.ft.reColor(fillColor ? fillColor : vector_multiply(ringColor, 0.21), duration);
+        this.c.ft.reColor(fillColor ? fillColor : multiple_vect(ringColor, 0.21), duration);
         if (txtColor) {
             this.txt.ft.reColor(txtColor, duration);
         }

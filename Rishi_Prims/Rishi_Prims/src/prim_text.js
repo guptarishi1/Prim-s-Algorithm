@@ -112,7 +112,7 @@ class Text extends TextBase {
 class TextFade extends Text {
     constructor(ctx, args) {
         super(ctx, args);
-        this.initC = deep_copy(this.color);
+        this.initC = coopyD(this.color);
         this.initC[3] = 0;
         if (this.color[3] === undefined)
             this.color[3] = 255;

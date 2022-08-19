@@ -42,17 +42,9 @@ function setup2D(s) {
 
 
 
-function showFR(s) {
-    const fps = s.frameRate();
-    let pos = (cvw === 1200) ? 0 : 1200;
-    s.fill(255);
-    s.textSize(10);
-    s.textAlign(s.LEFT, s.TOP);
-    s.noStroke();
-    s.text("FPS: " + fps.toFixed(1), pos, 10);
-}
 
-function deep_copy(x) {
+
+function coopyD(x) {
     let y = [];
     for (let i = 0; i < x.length; i++) {
         y[i] = x[i];
@@ -60,8 +52,8 @@ function deep_copy(x) {
     return y;
 }
 
-function vector_multiply(x, mult) {
-    let v = deep_copy(x);
+function multiple_vect(x, mult) {
+    let v = coopyD(x);
     for (let i = 0; i < v.length; i++) {
         v[i] *= mult;
     }
@@ -85,7 +77,7 @@ function vector_subtract(x, y) {
 }
 
 
-const Scene00 = function(s) {
+const scenes = function(s) {
     let t = {
 
     };
