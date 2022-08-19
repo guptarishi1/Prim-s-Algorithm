@@ -7,7 +7,7 @@ class Timer {
     }
 
     advance() {
-    }  // to be overridden
+    } 
 }
 
 
@@ -37,8 +37,8 @@ class Timer1 extends Timer {
     }
 
     advance() {
-        // seems that controlling the end result purely through calculus may render this.t
-        // not exactly 1 at the end of animation. So we need to force it to 1.
+        //It appears that controlling the eventual outcome only through mathematics may render this possible. t
+        // At the end of the animation, the number is not exactly one. As a result, we must push it to 1.
         if (this.f >= this.frames)
             return 1;
 
@@ -51,9 +51,7 @@ class Timer1 extends Timer {
     }
 }
 
-/** Timer2
- * accelerate then decelerate
- */
+
 class Timer2 extends Timer {
     constructor(frames) {
         super(frames);
@@ -62,14 +60,13 @@ class Timer2 extends Timer {
     }
 
     advance() {
-        // seems that controlling the end result purely through calculus may render this.t
-        // not exactly 1 at the end of animation. So we need to force it to 1.
+      
         if (this.f > this.frames)
             return 1;
 
         if (this.t < 0.5) {
             this.t += this.v;
-            if (this.t < 0.5) {  // fixme
+            if (this.t < 0.5) {  
                 this.v += this.a;
             }
         } else if (this.v > 0) {
@@ -109,7 +106,7 @@ class StrokeWeightTimer {
         if (this.s.frameCount <= this.end) {
             this.s.strokeWeight(this.sw);
         } else {
-            // fixme: 1.00001 is used since strokeWeight(0) will produce incorrect behavior
+            
             this.s.strokeWeight(this.sw * (1.00001 - this.timer.advance()));
         }
     }

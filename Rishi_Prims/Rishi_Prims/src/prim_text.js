@@ -2,8 +2,8 @@
 class TextBase extends PointBase {
     constructor(ctx, args) {
         super(ctx, args);
-        // I originally used the usual syntax of args.x || width / 2,
-        // but this would not work if 0 is passed in as x
+       
+        // However, if 0 is used as x, this will not function.
         this.rotation = args.rotation || 0;
     }
 
@@ -11,7 +11,7 @@ class TextBase extends PointBase {
         this.x = args.x || this.x;
         this.y = args.y || this.y;
     }
-    // move() merged into parent class
+    // move() has been incorporated into the parent class.
 }
 
 
@@ -30,7 +30,7 @@ class Text extends TextBase {
         this.size = args.size || 37;
     }
 
-    // works the same way as move()
+   
     reColor(color, duration) {
         this.ft.reColor(color, duration);
     }
@@ -48,20 +48,20 @@ class Text extends TextBase {
 
     shaking() {
         super.shaking();
-        if (this.mode === 1)   // changing size only works if text is in the center
+        if (this.mode === 1)   // Changing the size of the text only works if it is in the middle.
             this.size += Math.sin(this.move_timer.t * this.s.TWO_PI) * this.amp * 0.27;
     }
 
     jumping() {
         super.jumping();
         if (this.mode === 1)
-            // the integral of sin(2*PI*x) over 0 to 2*PI is 0, so position doesn't change
+            
             this.size += Math.sin(this.move_timer.t * this.s.TWO_PI) * this.amp * 0.2;
     }
 
-    // works the same way as move
+    // functions in the same way that move does
     change(str, duration) {
-        // todo
+        
         this.reset({ str: str });
     }
 
@@ -82,13 +82,13 @@ class Text extends TextBase {
             this.s.textAlign(this.s.CENTER, this.s.CENTER);
         } else if (this.mode === 2) {
             this.s.textAlign(this.s.RIGHT, this.s.TOP);
-        } else if (this.mode === 3) {  // center-right
+        } else if (this.mode === 3) {  
             this.s.textAlign(this.s.LEFT, this.s.CENTER);
-        } else if (this.mode === 4) {  // center-right
+        } else if (this.mode === 4) {  
             this.s.textAlign(this.s.RIGHT, this.s.CENTER);
         }
         this.s.textSize(this.size);
-        this.ft.advance();  // show color
+        this.ft.advance();  
 
         if (this.stroke) {
             this.s.strokeWeight(this.sw);
@@ -137,7 +137,7 @@ class TextFade extends Text {
 
 }
 
-// does not yet support fade out
+
 class TextWriteIn extends Text {
     constructor(ctx, args) {
         super(ctx, args);
@@ -157,17 +157,13 @@ class TextWriteIn extends Text {
     }
 }
 
-/***
- * todo
- */
+
 class TextRoll extends TextFade {
     constructor(ctx, args) {
         super(ctx, args);
     }
 
-    /**
-     * @param str - could be a number
-     */
+    
     roll(str) {
         this.reset({ str: "" + str });
     }

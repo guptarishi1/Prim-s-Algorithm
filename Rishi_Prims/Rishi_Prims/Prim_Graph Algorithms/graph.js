@@ -28,7 +28,7 @@ class grph extends PointBase {
 
         this.nodes = [];  // stores Node objects
         for (let i = 0; i < this.n; i++) {
-            this.nodes[i] = args.label ? new NodeLabel(this.s, {
+            this.nodes[i] = args.label ? new lablesnode(this.s, {
                 x: this.V[i][0], y: this.V[i][1], yOffset: this.yOffset, duration: 0.38,
                 start: this.start + frames(this.dur) * i / this.n, size: args.size || 38,
                 str: "" + i, font: args.font, color: args.color_v, r: this.radius,
@@ -137,7 +137,7 @@ class Node extends PointBase {
 }
 
 
-class NodeLabel extends Node {
+class lablesnode extends Node {
     constructor(ctx, args) {
         super(ctx, args);
         this.txt.reset({   // If it's a two-digit number, text should be shorter.

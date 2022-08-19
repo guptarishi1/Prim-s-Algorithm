@@ -34,11 +34,11 @@ function stdToP5(a, b, c) {
 
 function p5ToStd(a) {
     if (a.length === 3) {
-        return [a[2], a[0], -a[1]];   // x = z, y = x, z = -y
+        return [a[2], a[0], -a[1]];   
     } else if (a.length === 6) {
         return [a[2], a[0], -a[1], a[5], a[3], -a[4]];
     } else if (a.length === 9) {
-        //return [a[6], a[7], a[8], a[0], a[1], a[2], -a[3], -a[4], -a[5]];
+       
     }
 }
 
