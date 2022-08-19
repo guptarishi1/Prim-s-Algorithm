@@ -43,11 +43,7 @@ let G = {
     ]
 };
 
-/**
- * graph weights should be 0 to 99
- *
- * args.begin describes start time to trace algorithm
- */
+
 class Graph_Prim extends Graph_U {
     constructor(ctx, args) {
         super(ctx, args);
@@ -167,24 +163,24 @@ class Graph_Prim extends Graph_U {
 const Graph02 = function(s) {
     let t = {
         start: frames(1),
-        trace: frames(2),//frames(21),
+        trace: frames(2),
         txt: [frames(5), frames(8), frames(10), frames(12), frames(15), frames(17), frames(19)],
     };
     let tnr;
     s.preload = function() {
-        tnr = s.loadFont('../lib/font/comic.ttf');  // fixme: change this for github pages
+        tnr = s.loadFont('../lib/font/comic.ttf');  
     };
     s.setup = function () {
         setup2D(s);
         s.g = new Graph_Prim(s, {
             V: G.V, E: G.E, font: tnr, start: t.start, begin: t.trace, time: t.txt
         });
-        //s.d = new Dragger(s, [s.g.txt, s.g.arr]);
+        
     };
     s.draw = function () {
         s.background(255,255, 255);
         s.g.show();
-        //s.d.show();
+        
     };
 };
 
