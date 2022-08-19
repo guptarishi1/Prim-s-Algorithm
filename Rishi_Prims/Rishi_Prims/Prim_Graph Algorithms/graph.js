@@ -2,47 +2,47 @@
 class Graph extends PointBase {
     constructor(ctx, args) {
         super(ctx, args);
-        this.f = 80;   // how many frames for advancing one step of the algorithm
+        this.f = 82;   // how many frames are needed to advance one stage of the algorithm
         this.begin = args.begin || 100;
 
-        // variables used to keep track of the algorithm's progress
+       
         this.finished = false;
 
         this.V = args.V;
-        this.n = this.V.length;  // n - number of nodes
+        this.n = this.V.length;  // here  n  is the number of nodes
         this.E = args.E;
-        this.m = this.E.length;  // m - number of edges
+        this.m = this.E.length;  // here m is the number of edges
 
-        // value is undefined if no edge, true for unweighted graphs, a number for weighted graph
-        this.A = [];   // 2D adjacency list;
+     
+        this.A = [];   // this 2D list keeps the track of adjesent nodes;
 
-        this.edges = [];  // stores the Edge objects
-        // init adjacency list to all null, actual initialization deferred to subclasses
+        this.edges = [];  // this helps to store the edge 
+       
         for (let i = 0; i < this.n; i++) {
             this.A[i] = [];
             this.edges[i] = [];
         }
         this.dur = args.duration || 1.7;
-        this.yOffset = args.yOffset === undefined ? -5 : args.yOffset;   // offset for node text
-        this.radius = args.radius || (args.label ? 67 : 57);  // node radius
+        this.yOffset = args.yOffset === undefined ? -5 : args.yOffset;   
+        this.radius = args.radius || (args.label ? 68 : 56);  // size of radius is mentioned
 
         this.nodes = [];  // stores Node objects
         for (let i = 0; i < this.n; i++) {
             this.nodes[i] = args.label ? new NodeLabel(this.s, {
-                x: this.V[i][0], y: this.V[i][1], yOffset: this.yOffset, duration: 0.37,
-                start: this.start + frames(this.dur) * i / this.n, size: args.size || 37,
+                x: this.V[i][0], y: this.V[i][1], yOffset: this.yOffset, duration: 0.38,
+                start: this.start + frames(this.dur) * i / this.n, size: args.size || 38,
                 str: "" + i, font: args.font, color: args.color_v, r: this.radius,
                 label: args.label
             }) : new Node(this.s, {
-                x: this.V[i][0], y: this.V[i][1], yOffset: this.yOffset, duration: 0.37,
-                // display all nodes in this.dur seconds
-                start: this.start + frames(this.dur) * i / this.n, size: args.size || 42,
+                x: this.V[i][0], y: this.V[i][1], yOffset: this.yOffset, duration: 0.38,
+                // show all nodes within this.dur secondss
+                start: this.start + frames(this.dur) * i / this.n, size: args.size || 41,
                 str: "" + i, font: args.font, color: args.color_v, r: this.radius,
             });
         }
     }
     show() {
-        // decrement to avoid the label being overwritten in undirected weighted graphs
+        // In undirected weighted graphs, decrease to avoid the label being overwritten.
         for (let i = this.n - 1; i >= 0; i--)
             for (let j = this.n - 1; j >= 0; j--)
                 if (this.edges[i][j])
@@ -111,7 +111,7 @@ class Node extends PointBase {
             if (this.dis) {
                 this.s.ellipse(this.x, this.y,
                     this.r + this.thickness * t, this.r + this.thickness * t);
-            } else     // refined animation on 05/14
+            } else     
                 this.s.arc(this.x, this.y, r, r,
                     -this.s.PI + t * this.s.HALF_PI, -this.s.PI + t * this.s.TWO_PI * 1.2499);
         } else
@@ -122,7 +122,7 @@ class Node extends PointBase {
     reColor(ringColor, fillColor, txtColor, duration) {
        
         this.c.st.reColor(ringColor, duration);
-        this.c.ft.reColor(fillColor ? fillColor : vector_multiply(ringColor, 0.2), duration);
+        this.c.ft.reColor(fillColor ? fillColor : vector_multiply(ringColor, 0.21), duration);
         if (txtColor) {
             this.txt.ft.reColor(txtColor, duration);
         }
@@ -140,7 +140,7 @@ class Node extends PointBase {
 class NodeLabel extends Node {
     constructor(ctx, args) {
         super(ctx, args);
-        this.txt.reset({   // if it's a two digit number, txt needs to be smaller
+        this.txt.reset({   // If it's a two-digit number, text should be shorter.
             x: this.x - 12, y: this.y - 14, size: args.str.length === 2 ? 37 : 42  
         });
         let m = 0.24;
@@ -164,7 +164,7 @@ class NodeLabel extends Node {
             this.lin.st.reColor(lineColor, duration);
     }
 
-    reset(cost, down) {  // display reset animations, 2nd param specify direction (default shift up)
+    reset(cost, down) {  // show reset animations, second parameter specifies direction (default shift up)
         this.resetted = true;
         this.f = 0;
         this.duration = 1;
@@ -217,27 +217,27 @@ class Edge extends Line {
         let xm = this.x1 + dx / 2, ym = this.y1 + dy / 2;
         let len = Math.sqrt(dx * dx + dy * dy);
 
-        if (args.d) {  // needs an arc
+        if (args.d) {  // need an arc
             this.d = args.d;
 
-            // calculate center of arc, also will be where the text lies
+            // compute the arc's center, which will also be the location of the text
             this.x3 = (xm - dy * this.d / len)*0.8;
             this.y3 = (ym + dx * this.d / len) * 0.8;
 
-            // calculate the centroid of the arc
-            // (intersection of perpendicular bisectors for 1,3 and 2,3)
+            // compute the arc's centroid
+            
             let p1 = this.getPB(this.x1, this.y1, this.x3, this.y3);
             let p2 = this.getPB(this.x2, this.y2, this.x3, this.y3);
             let a1 = p1[0], b1 = p1[1], c1 = p1[2], a2 = p2[0], b2 = p2[1], c2 = p2[2];
             let det = a1 * b2 - b1 * a2;
-            this.xc = (c1 * b2 - b1 * c2) / det;  // 2d Cramer's Rule
+            this.xc = (c1 * b2 - b1 * c2) / det;  
             this.yc = (a1 * c2 - c1 * a2) / det;
 
-            // calculate the radius of the arc
+            // this helps to calculate the radius of the node
             let x1d = this.x1 - this.xc, y1d = this.y1 - this.yc;
             this.r = Math.sqrt(x1d * x1d + y1d * y1d);
 
-            // calculate start and end angles
+           
             this.a1 = Math.atan2(y1d, x1d); 
             let x2d = this.x2 - this.xc, y2d = this.y2 - this.yc;
             this.a2 = Math.atan2(y2d, x2d);
@@ -247,8 +247,8 @@ class Edge extends Line {
                 this.a1 += this.s.TWO_PI;
             }
 
-            // start and end angles, after "subtracting" the radius of two nodes from the curve
-            let half_a = Math.asin(this.node_r / 2 / this.r) * 1.14;  // guaranteed in [0, PI/4]
+           
+            let half_a = Math.asin(this.node_r / 2 / this.r) * 1.14;  
             if (this.d > 0) {
                 this.la1 = this.a1 - half_a;  
                 this.la2 = this.a2 + half_a;  
@@ -259,7 +259,7 @@ class Edge extends Line {
 
             this.l = this.createLine();
 
-            this.numPts = 27;   // this is used for highlighting, code copied from Arc class
+            this.numPts = 27;  
             this.pts = [];
             let a = this.a1;
             let da = (this.a2 - this.a1) / (this.numPts - 1);
@@ -269,61 +269,61 @@ class Edge extends Line {
                 this.pts[i] = [x, y];
             }
         } else {
-            // the coordinates for line segment; it's shorter than the distance between node centers
-            this.lx1 = args.x1 + dx * this.node_r / len * 0.54;
-            // 0.54, to account for the node's ring thickness
-            this.lx2 = args.x2 - dx * this.node_r / len * 0.57;
-            this.ly1 = args.y1 + dy * this.node_r / len * 0.54;
-            this.ly2 = args.y2 - dy * this.node_r / len * 0.57;
+            // the coordinates of a line segment; it is less than the distance between node centers
+            this.lx1 = args.x1 + dx * this.node_r / len * 0.53;
+            
+            this.lx2 = args.x2 - dx * this.node_r / len * 0.58;
+            this.ly1 = args.y1 + dy * this.node_r / len * 0.55;
+            this.ly2 = args.y2 - dy * this.node_r / len * 0.56;
 
             this.l = this.createLine();
             this.x3 = args.x3 || xm;
             this.y3 = args.y3 || ym;
         }
-        // add label
+        
         if (args.weight !== undefined) {
             this.str = "" + args.weight;
             this.txt = new TextFade(this.s, {
                 str: this.str, x: this.x3, y: this.y3, mode: 1,
                 start: args.start, color: this.txtColor,
-                stroke: [0, 0, 0],    // black stroke
+                stroke: [0, 0, 0],   
                 strokeweight: 7, size: this.size
             });
         }
     }
 
-    // calculates perpendicular bisector, returns [a, b, c] for line ax + by = c
+    
     getPB(x1, y1, x2, y2) {
-        let a = x1 - x2;  // a = -dx
-        let b = y1 - y2;  // b = -dy
-        let xm = x1 - a / 2, ym = y1 - b / 2;  // midpoint
+        let a = x1 - x2;
+        let b = y1 - y2;
+        let xm = x1 - a / 2, ym = y1 - b / 2;  // midpoint of the edge
         return [a, b, a * xm + b * ym];
     }
 
     createLine(){
-        return this.r ? (this.directed ? new ArcArrow(this.s, {   // arc directed
+        return this.r ? (this.directed ? new ArcArrow(this.s, {   
             r: this.r, x: this.xc, y: this.yc, a1: this.la1, a2: this.la2,
             start: this.start, duration: this.duration, color: this.color, tipLen: this.tipLen
-        }) : new Arc(this.s, {  // arc undirected
+        }) : new Arc(this.s, {  
             r: this.r, x: this.xc, y: this.yc, a1: this.la1, a2: this.la2,
             start: this.start, duration: this.duration, color: this.color,
-        })) : (this.directed ? new Arrow(this.s, {  // straight directed
+        })) : (this.directed ? new Arrow(this.s, { 
             x1: this.lx1, x2: this.lx2, y1: this.ly1, y2: this.ly2, start: this.start,
             duration: this.duration, color: this.color,
             tipAngle: 0.37, tipLen: this.tipLen,
-        }) : new Line(this.s, {  // straight undirected
+        }) : new Line(this.s, {  
             x1: this.lx1, x2: this.lx2, y1: this.ly1, y2: this.ly2, start: this.start,
             duration: this.duration, color: this.color,
         }));
     }
 
-    addEdge(color) {  // shows a line/arc growing on top of previous edge
+    addEdge(color) {  
         this.color = color;
         this.start = this.s.frameCount + 1;
         this.l2 = this.createLine();
     }
 
-    shake(amp) {  // shake the text
+    shake(amp) {  // this shake the edge value for animation effect
         this.txt.shake(amp, 0.2);
     }
 
@@ -349,9 +349,7 @@ class Edge extends Line {
         this.s_timer = new StrokeChanger(this.s, this.h_color);
     }
 
-    /**
-     * @see class Node's highlight() and dehighlight() method
-     */
+    
     dehighlight() {
         this.h_fr = this.f + frames(1);
     }
@@ -362,7 +360,7 @@ class Edge extends Line {
             this.s_timer.advance();
             this.s.strokeWeight(this.thickness);
             if (this.f === this.h_fr - frames(0.27)) {
-                this.s_timer.fadeOut(0.27);  // fade out .27 seconds before duration ends
+                this.s_timer.fadeOut(0.22);  // fading out 22 seconds before the term expires
             }
             let t = this.h_timer.advance();
             if (!this.d)
