@@ -4,7 +4,7 @@ let fr = 90;  // frame rate
 let cvw = 1300;
 
 
-let cvh = 1000;
+let cvh = 1050;
 
 let scn = 2;  
 let matrix = [1, 1, 1, -1, 1, 2];

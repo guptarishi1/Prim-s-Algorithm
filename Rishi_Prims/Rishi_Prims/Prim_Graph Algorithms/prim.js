@@ -61,7 +61,7 @@ class Graph_Prim extends Graph_effect {
             x: 607-400, y: 77+600, size: 0, start: args.time[0],
         });
         this.txt[1] = new TextWriteIn(this.s, {
-            str: "Add start node 0 to the tree",
+            str: "Create a tree with a single vertex picked at random from the graph. Here 0 node is starting node",
             x: 647-400, y: 127+600, size: 20, start: args.time[0],
         });
         this.txt[2] = new TextWriteIn(this.s, {
@@ -69,21 +69,21 @@ class Graph_Prim extends Graph_effect {
             x: 647-400, y: 177+600, size: 20, start: args.time[0],
         });
         this.txt[3] = new TextWriteIn(this.s, {
-            str: "1. Check all edges from nodes in tree\n" +
-                "    to nodes outside the tree",
+            str: "1. Create a tree with a single vertex picked at random from the graph.",
             x: 687-400, y: 227+600, size: 20, start: args.time[0],
         });
         this.txt[4] = new TextWriteIn(this.s, {
-            str: "2. Find the smallest among such edges",
-            x: 687-400, y: 317+600, size: 20, start: args.time[0],
+            str: "2. Grow the tree by one edge: of the edges that connect the tree to vertices that aren't yet in the tree \n" + 
+             "pick the one with the lowest weight and add it to the tree",
+            x: 687-400, y: 270+600, size: 20, start: args.time[0],
         });
         this.txt[5] = new TextWriteIn(this.s, {
-            str: "3. Add this edge and its endpoint to tree",
-            x: 687-400, y: 367+600, size: 20, start: args.time[0],
+            str: "3. Recursively call step 2 (until the tree covers all the nodes).",
+            x: 687-400, y: 340+600, size: 20, start: args.time[0],
         });
         this.txt[6] = new TextWriteIn(this.s, {
             str: "End",
-            x: 647-400, y: 417+600, size: 20, start: args.time[0],
+            x: 647-400, y: 390+600, size: 20, start: args.time[0],
         });
         this.arr = new Arrow(this.s, {
             x1: 597, y1: 140, x2: 597, y2: 140, tipLen:0, color: [255,255,255], start: 0,
