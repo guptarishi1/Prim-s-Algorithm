@@ -50,23 +50,20 @@
         <h3>
             What is Prim's Algorithm
         </h3>
-        <p> It falls under a class of algorithms called greedy algorithms that find the local optimum in the hopes of finding a global optimum.
-
-            We start from one vertex and keep adding edges with the lowest weight until we reach our goal.
-            
-            The steps for implementing Prim's algorithm are as follows:
-            
-            Initialize the minimum spanning tree with a vertex chosen at random.
-            Find all the edges that connect the tree to new vertices, find the minimum and add it to the tree
-            Keep repeating step 2 until we get a minimum spanning tree</p>
+        <p> Prim's Algorithm was created to discover the MST (minimum spanning tree)  across a connected, weighted undirected graph.
+            Prims Algorithm is based on greedy algorithm.  This signifies that the technique finds the minimal weight "tree" (a structure without cycles) that connects all of the vertices via a subset of all available edges.
+        </p>
         
         <h3>
          Time and Space complexity of the Algorithm: 
         </h3>
-        <p> Prim’s algorithm has a time complexity of O(V2), V being the number of vertices and can be improved up to O(E log V) using Fibonacci heaps
-            Total space complexity is of order O(V+E).
-
+        <p> The time complexity of Prim's method using the adjacency matrix, is O(V^2), where V is the number of vertices in the graph. By employing Fibonacci heaps, this time complexity may be reduced to O(E + Vlog V). By using the binary heap and adjacency list this time complexity may be reduced to O(E log V)
+            The total complexity of space is of the order O(V+E).
+            
         </p>
+        <h3>
+            Prims Algorithm visulaization 
+        </h3>
         <div id="canvas-result"></div>
         <h3>
             Prim's Algorithm psuedo code :-
@@ -76,26 +73,27 @@
 
         <p>
             
-            prims(Graph g) { <br/>
-                &emsp;foreach vertex v in g: <br/>
-                &emsp;&emsp;v.distance = INF<br/>
-                &emsp;start = g.getSomeArbitraryVertex()<br/>
-                &emsp;start.distance = 0<br/>
+            
+            prims_algo(Graph pa) { <br/>
+                &emsp;for vertexes v in pa:<br/>
+                &emsp;&emsp;v.dist = INF<br/>
+                &emsp;St = pa.startingnode()<br/>
+                &emsp;St.dist = 0<br/>
                 
             &emsp;    mst = {}<br/>
-            &emsp;    heap = buildHeap(g.vertices – {start})<br/>
-            &emsp;    foreach vertex v in start.neighbors():<br/>
-            &emsp;     &emsp;   v.distance = g.weight(start, v)<br/>
-            &emsp;     &emsp;   v.previous = start<br/>
-            &emsp;     &emsp;   heap.decreaseKey(v, v.distance)<br/>
+            &emsp;    heap = buildHeap(pa.vertices – {St})<br/>
+            &emsp;    for each vertex v in St.neighbors():<br/>
+            &emsp;     &emsp;   v.dist = pa.weight(St, v)<br/>
+            &emsp;     &emsp;   v.previous = St<br/>
+            &emsp;     &emsp;   heap.decreaseKey(v, v.dist)<br/>
             &emsp;    while (! heap.empty()):<br/>
             &emsp;     &emsp;   v = heap.deleteMin()<br/>
             &emsp;     &emsp;   mst.addEdge(v, v.previous)<br/>
-            &emsp;     &emsp;   foreach edge (v, u) in g:<br/>
-            &emsp;     &emsp;     &emsp;  d1 = v.distance<br/>
-            &emsp;     &emsp;     &emsp;  d2 = u.distance<br/>
+            &emsp;     &emsp;   for edges (v, u) in pa:<br/>
+            &emsp;     &emsp;     &emsp;  d1 = v.dist<br/>
+            &emsp;     &emsp;     &emsp;  d2 = u.dist<br/>
             &emsp;     &emsp;     &emsp;  if (d1 < d2):<br/>
-            &emsp;     &emsp;     &emsp;    &emsp;  u.previous = v <br/>
+            &emsp;     &emsp;     &emsp;    &emsp;  u.previous = v  <br/>
         </p>
         <h3>
             Pros and Cons of Prim's Algorithm
@@ -115,19 +113,13 @@
             Cons:
         </h4>
         <p>
-            1) Time taken to check for smallest weight arc
-            makes it slow for large numbers of nodes.<br/>
-            2) Difficult to program, though it can be
-            programmed in matrix form<br/>
-            3) Same weight may increase the complexity
-            when one of the weights is eliminated in a cycle<br/>
-        
-        
-       
-            4)Prim’s algorithm fails for Directed Graph :<br/>
+            1) The time it takes to find the least weight arc slows it down for big numbers of nodes.<br/>
+            2) Equal weighted edge can add complexity if one of the weights in the cycle is removed and the vertices are connected.<br/>
+            3) Prim’s algorithm can fails for Directed Graph : <br/>
        
         
-            &emsp; Prim’s algorithm assumes that all vertices are connected. But in a directed graph, every node is not reachable from every other node. So, Prim’s algorithm fails due to this reason <br/>
+            &emsp; In a directed graph not every node is reachable from every other node. So Prim's algorithm fails for this reason. For example, in below-directed graph let’s assume the starting node is “D”.
+            <br/>
         </p>
         
         <img src="../src/Screenshot 2022-08-17 230217.png" alt="SS" >
@@ -138,21 +130,17 @@
 
         </h3>
         <p>
-            1. Distance in the middle of the cities for the minimum route calculation for transportation.<br/>
+            1. City center distance for transit minimum route calculation.            <br/>
             
-            2. For Establishing the network cables play a crucial role in discovering the minimum cables needed to cover the whole region.<br/>
+            2. In a network setup, cables play an important role in determining the minimum number of cables required to cover an entire area.            <br/>
             
-            3. Cluster Analysis: k clustering problem can be considered as obtaining an MST and deleting the k-1 most pricey edges.<br/>
+            3. Cluster Analysis: The k-clustering problem can be viewed as taking the MST and removing the k-1 most expensive edges.<br/>
             
-            4. Path-finding algorithms used in AI (Artificial Intelligence).<br/>
+            4. It can be used in the path-finding algorithm which is used in AI.<br/>
             
-            5. Game Development.<br/>
+            5. Prim’s Algorithm can be used in game development like maze games.            <br/>
             
-            6. Especially maze games.<br/>
-            
-            7. To make protocols in network cycles.<br/>
-            
-            8. Cognitive Science<br/>
+            6. It helps to create a log on the network cycle.            <br/>
 
         </p>
 
@@ -162,11 +150,8 @@
         </h3>
         <p>
 
-            we checked how prims algorithm uses the GReddy approach to create the minimum spanning tree. 
-            The use of greedy’s algorithm makes it easier for choosing the edge with minimum weight. 
-            Also, we analyzed how the min-heap is chosen, and the tree is formed.
-             The time complexity for this algorithm has also been discussed, and how this algorithm is achieved we saw that too. 
-             by this, we can say that the prims algorithm is a good greedy approach to find the minimum spanning tree.  
+            We saw how Prim's algorithm uses the greedy approach to build a minimum spanning tree. A greedy algorithm makes it easy to pick the edge with the lowest weight. We also analyzed how the minimum heap is chosen and the tree is formed. The time complexity of this algorithm has also been discussed and we have also seen how this algorithm is achieved. This makes the Prims algorithm a good greedy approach to finding a minimum spanning tree.
+ 
         </p>
        </ul> 
        
